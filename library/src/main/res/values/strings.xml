@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AndroidUtils</string>
+    <string name="permission_warn">"由于安全原因，你需要手动允许以下授权："</string>
+    <string name="allow_permission">申请授权</string>
+    <string name="permission_allow">同意</string>
+    <string name="permission_back">取消</string>
+    <string name="allow_permission_success">授权成功!</string>
+    <string name="choose_file">选择文件</string>
+</resources>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="10dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="当前路径："/>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="1dp"
+                android:layout_weight="4"
+                android:background="#b7b7b7">
+
+            <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFF"
+                    android:padding="3dp"
+                    style="@android:style/Widget.DeviceDefault.Light.ScrollView">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:lines="1"
+                        android:id="@+id/path"
+                        android:text="/sdcard/"/>
+            </HorizontalScrollView>
+        </LinearLayout>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorAccent"
+                android:id="@+id/back"
+                android:text="返回上级"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="1dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#b7b7b7">
+
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#FFF"
+                android:id="@+id/fileList"></ListView>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/default_item"
+                android:background="#FFF"
+                android:layout_height="wrap_content">
+            <include layout="@layout/deprecated_choose_item"
+                    android:visibility="invisible"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:textColor="#ff0000"
+            android:text="未发现相符的文件"
+            android:visibility="gone"
+            android:id="@+id/toast"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="文件名："/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="1dp"
+                android:background="#b7b7b7">
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFF"
+                    android:maxLength="256"
+                    android:textSize="14sp"
+                    android:textColor="#000"
+                    android:id="@+id/selectName"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
