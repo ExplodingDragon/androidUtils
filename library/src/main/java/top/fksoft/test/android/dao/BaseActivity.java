@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import top.fksoft.test.android.R;
 import top.fksoft.test.android.ToastUtils;
+import top.fksoft.test.android.data.SqlHelper;
 import top.fksoft.test.android.nutil.ViewInterface;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        database = SQLHelper.newInstance(getContext()).getWritableDatabase();
+        database = SqlHelper.newInstance(getContext()).getWritableDatabase();
         setContentView(initLayout());
         config = getSharedPreferences("Config", MODE_PRIVATE);
         cfgEdit = config.edit();
@@ -58,6 +59,15 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public SQLiteDatabase getDatabase() {
         return database;
     }
+
+    public SharedPreferences.Editor getCfgEdit() {
+        return cfgEdit;
+    }
+
+    public SharedPreferences getConfig() {
+        return config;
+    }
+
     /**
      * 权限的授权请求
      *
@@ -149,25 +159,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         return localIntent;
     }
 
-    public static class SQLHelper extends SQLiteOpenHelper {
-        public static SQLHelper newInstance(Context ctx) {
-            SQLHelper fragment = new SQLHelper(ctx,"CFG.DB",null,1);
-            return fragment;
-        }
-        public SQLHelper( Context context,  String name,  SQLiteDatabase.CursorFactory factory, int version) {
-            super(context, name, factory, version);
-        }
 
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        }
-    }
 
     public void showToast(int id,Object ... data){
         ToastUtils.showToast(getContext(),id,data);
