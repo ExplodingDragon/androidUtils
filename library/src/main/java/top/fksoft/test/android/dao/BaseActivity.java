@@ -134,6 +134,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         if (i!=0){
             showToast(R.string.allow_permission_success);
         }
+
     }
 
     public void permissionError(String[] permissions){
