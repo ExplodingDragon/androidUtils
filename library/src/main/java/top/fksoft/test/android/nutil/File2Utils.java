@@ -38,6 +38,10 @@ public class File2Utils {
             }
         });
     }
+    /**
+     * <p>对File 的 List进行排序</p>
+     * @param fileList 原始数据
+     */
     public static void sort2(List<File> fileList){
         Collections.sort(fileList, (o1, o2) -> {
             if (o1.isDirectory() && o2.isFile()) {
@@ -49,13 +53,41 @@ public class File2Utils {
                 String name2 = o2.getName();
                 if (name1.equals(name2))
                     return 0;
-
-
-                return 0;
+                char[] char1 = name1.toCharArray();
+                char[] char2 = name2.toCharArray();
+                int len = char1.length > char2.length ? char2.length : char1.length;
+                for (int i = 0; i < len; i++) {
+                    char c1 = char1[i];
+                    char c2 = char2[i];
+                    if (c1 != c2){
+                        continue;
+                    }
+                    if ((Character.isLetter(c1) && Character.isLetter(c2))||(isNumber(c1) && isNumber(c2))){
+                        if(Character.isLetter(c1) && Character.isLetter(c2)){
+                            
+                        }else {
+                            return c1 - c2;
+                        }
+                    }else if(Character.isLetter(c1) || Character.isLetter(c2)){
+                        if (Character.isLetter(c1)){
+                            return -1;
+                        }else {
+                            return 1;
+                        }
+                    }else {
+                        int i1 = getGBCode(c1);
+                        int i2 = getGBCode(c2);
+                        return i1 - i2;
+                    }
+                }
+                return char1.length - char2.length;
             }
         });
     }
 
+    public static boolean isNumber(char c) {
+        return c <='9' && c>='0';
+    }
 
 
     /**
