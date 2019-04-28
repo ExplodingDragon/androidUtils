@@ -176,5 +176,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onDestroy();
         if (database!=null)
             database.close();
+
     }
 }
