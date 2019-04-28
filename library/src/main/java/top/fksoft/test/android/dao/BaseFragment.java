@@ -18,18 +18,18 @@ import top.fksoft.test.android.nutil.ViewInterface;
 public abstract class BaseFragment<T extends Activity> extends Fragment implements ViewInterface,View.OnClickListener {
     private View contentView;
     private SQLiteDatabase database;
-    private T context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        contentView = LayoutInflater.from(getContext()).inflate(initLayout(),container,false);
-        context = (T) getActivity();
-        database = SqlHelper.newInstance(getActivity()).getWritableDatabase();
+        contentView = inflater.inflate(initLayout(),container,false);
         return contentView;
     }
 
     @Override
     public SQLiteDatabase getDatabase() {
+        if (database == null) {
+            database = SqlHelper.newInstance(getContext()).getWritableDatabase();
+        }
         return database;
     }
 
@@ -42,7 +42,7 @@ public abstract class BaseFragment<T extends Activity> extends Fragment implemen
     @Nullable
     @Override
     public T getContext() {
-        return context;
+        return (T) getActivity();
     }
 
     public <T extends View> T findViewById(int id) {
@@ -53,8 +53,10 @@ public abstract class BaseFragment<T extends Activity> extends Fragment implemen
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (database!=null)
+        if (database!=null){
             database.close();
+            database = null;
+        }
     }
     public void showToast(int id,Object ... data){
         ToastUtils.showToast(getContext(),id,data);
