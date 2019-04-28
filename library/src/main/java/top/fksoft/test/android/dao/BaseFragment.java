@@ -1,6 +1,8 @@
 package top.fksoft.test.android.dao;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,15 +11,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import top.fksoft.test.android.ToastUtils;
+import top.fksoft.test.android.data.SqlHelper;
 import top.fksoft.test.android.nutil.ViewInterface;
 
 public abstract class BaseFragment<T extends Activity> extends Fragment implements ViewInterface,View.OnClickListener {
     private View contentView;
+    private SQLiteDatabase database;
+    private T context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         contentView = LayoutInflater.from(getContext()).inflate(initLayout(),container,false);
+        context = (T) getActivity();
+        database = SqlHelper.newInstance(getActivity()).getWritableDatabase();
         return contentView;
+    }
+
+    @Override
+    public SQLiteDatabase getDatabase() {
+        return database;
     }
 
     @Override
@@ -29,7 +42,7 @@ public abstract class BaseFragment<T extends Activity> extends Fragment implemen
     @Nullable
     @Override
     public T getContext() {
-        return (T) getActivity();
+        return context;
     }
 
     public <T extends View> T findViewById(int id) {
@@ -37,7 +50,16 @@ public abstract class BaseFragment<T extends Activity> extends Fragment implemen
         return viewById;
     }
 
-    public void showToast(String text){
-        Toast.makeText(getContext(),text,Toast.LENGTH_SHORT).show();
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (database!=null)
+            database.close();
+    }
+    public void showToast(int id,Object ... data){
+        ToastUtils.showToast(getContext(),id,data);
+    }
+    public void showToast(String format,Object ... data){
+        ToastUtils.showToast(getContext(),format,data);
     }
 }

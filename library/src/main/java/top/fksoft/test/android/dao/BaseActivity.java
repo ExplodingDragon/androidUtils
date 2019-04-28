@@ -162,14 +162,19 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
 
 
+
     public void showToast(int id,Object ... data){
         ToastUtils.showToast(getContext(),id,data);
+    }
+    public void showToast(String format,Object ... data){
+        ToastUtils.showToast(getContext(),format,data);
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        database.close();
+        if (database!=null)
+            database.close();
     }
 }
