@@ -9,7 +9,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:id="@+id/file_image"
-                android:src="@mipmap/directory"/>
+                android:src="@mipmap/filechoose_directory"/>
 
         <TextView
                 android:layout_width="match_parent"

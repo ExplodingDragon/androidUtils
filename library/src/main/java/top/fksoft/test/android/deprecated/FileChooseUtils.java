@@ -59,9 +59,9 @@ public class FileChooseUtils {
                 initView(convertView);
                 File file = filesList.get(position);
                 if (file.isDirectory()) {
-                    fileImage.setImageResource(R.mipmap.directory);
+                    fileImage.setImageResource(R.mipmap.filechoose_directory);
                 } else {
-                    fileImage.setImageResource(R.mipmap.file);
+                    fileImage.setImageResource(R.mipmap.filechoose_file);
                 }
                 fileText.setText(file.getName());
                 return convertView;

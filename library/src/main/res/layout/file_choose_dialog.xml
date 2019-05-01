@@ -17,7 +17,7 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:background="@drawable/tool_bar_shadow"/>
+                android:background="@drawable/status_shadow"/>
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
